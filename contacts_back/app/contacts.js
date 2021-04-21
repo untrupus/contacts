@@ -4,7 +4,7 @@ const config = require("../config");
 const Contact = require("../models/Contact");
 
 router.get('/', async (req, res) => {
-    const result = await Contact.find();
+    const result = await Contact.find().sort({name: 1});
     if (result) {
         res.send(result);
     } else {

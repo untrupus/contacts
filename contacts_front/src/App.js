@@ -25,6 +25,10 @@ function App() {
                 name={contact.name}
                 phone={contact.phone}
                 image={contact.image}
+                address={contact.address}
+                email={contact.email}
+                website={contact.website}
+                id={contact._id}
             />
         )
     });

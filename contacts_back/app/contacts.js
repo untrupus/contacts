@@ -12,15 +12,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
-    const result = await Contact.findById(req.params.id);
-    if (result) {
-        res.send(result);
-    } else {
-        res.sendStatus(404);
-    }
-});
-
 router.post('/', config.upload.single("image"), async (req, res) => {
     const contactData = req.body;
     if (req.file) {

@@ -2,7 +2,7 @@ import {
     FETCH_CONTACTS_FAILURE,
     FETCH_CONTACTS_SUCCESS,
     ADD_CONTACT_FAILURE,
-
+    DELETE_CONTACT_FAILURE
 } from "./actionTypes";
 
 import axiosOrder from "../axiosOrder";
@@ -39,3 +39,17 @@ export const addContact = data => {
         }
     };
 };
+
+const deleteContactFailure = error => {
+    return {type: DELETE_CONTACT_FAILURE, error};
+};
+
+export const deleteContact = id => {
+    return async dispatch => {
+        try {
+            await axiosOrder.delete("/contacts/" + id);
+        } catch (e) {
+            dispatch(deleteContactFailure(e))
+        }
+    }
+}

@@ -14,7 +14,6 @@ const ContactSchema = new Schema({
     address: String,
     image: String,
     email: String,
-    company: String,
     website: String,
 });
 

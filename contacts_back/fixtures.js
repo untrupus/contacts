@@ -19,7 +19,6 @@ db.once("open", async () => {
             address: "6886 Molly Camp Suite 564",
             image: "1.jpeg",
             email: "anna@gmail.com",
-            company: "Quigley, Marks and Durgan",
             website: "quinn.com"
         },
     );

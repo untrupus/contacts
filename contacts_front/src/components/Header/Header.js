@@ -7,17 +7,16 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import AddContactForm from "../AddContactForm/AddContactForm";
+import LetterSort from "../LetterSort/LetterSort";
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
     menuButton: {
-        marginRight: theme.spacing(2),
+        // marginRight: theme.spacing(2),
     },
-    title: {
-        flexGrow: 1,
-    },
+
 }));
 
 const Header = () => {
@@ -38,6 +37,7 @@ const Header = () => {
                     <Typography variant="h6" className={classes.title}>
                         My Contacts
                     </Typography>
+                    <LetterSort/>
                     <Button
                         color="inherit"
                         onClick={() => setOpen(!open)}

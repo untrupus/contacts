@@ -3,7 +3,10 @@ import {
     FETCH_CONTACTS_SUCCESS,
     ADD_CONTACT_FAILURE,
     DELETE_CONTACT_FAILURE,
-    EDIT_CONTACT_FAILURE
+    EDIT_CONTACT_FAILURE,
+    FETCH_SORTED_CONTACTS_FAILURE,
+    FETCH_SORTED_CONTACTS_SUCCESS,
+    SEARCH_CONTACTS_SUCCESS
 } from "./actionTypes";
 
 import axiosOrder from "../axiosOrder";
@@ -68,3 +71,27 @@ export const editContact = (id, data) => {
         }
     };
 };
+
+const fetchSortedContactsSuccess= data => {
+    return {type: FETCH_SORTED_CONTACTS_SUCCESS, data};
+};
+
+const fetchSortedContactsFailure = error => {
+    return {type: FETCH_SORTED_CONTACTS_FAILURE, error};
+};
+
+export const fetchSortedContacts = letter => {
+    return async dispatch => {
+        try {
+            const response = await axiosOrder.get("/contacts/" + letter);
+            dispatch(fetchSortedContactsSuccess(response.data));
+        } catch (e) {
+            dispatch(fetchSortedContactsFailure(e));
+        }
+    };
+};
+
+export const searchContactSuccess = data => {
+    return {type: SEARCH_CONTACTS_SUCCESS, data};
+};
+

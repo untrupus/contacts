@@ -12,6 +12,23 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get("/:letter", async (req, res) => {
+    const contacts = await Contact.find();
+    const sortedContacts = [];
+
+    contacts.forEach(contact => {
+        if (contact.name[0].toLowerCase() === req.params.letter.toLowerCase()) {
+            sortedContacts.push(contact);
+        }
+    });
+
+    try {
+        res.send(sortedContacts);
+    } catch (e) {
+        res.sendStatus(404);
+    }
+});
+
 router.post('/', config.upload.single("image"), async (req, res) => {
     const contactData = req.body;
     if (req.file) {

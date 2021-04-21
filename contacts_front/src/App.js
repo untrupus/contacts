@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {makeStyles} from '@material-ui/core/styles';
 import Header from "./components/Header/Header";
+import SearchForm from "./components/SearchForm/SearchForm";
 import SingleContact from "./components/SingleContact/SingleContact";
 import {fetchContacts} from "./store/actions";
 
@@ -36,6 +37,7 @@ function App() {
     return (
         <div className="App">
             <Header/>
+            <SearchForm/>
             <div className={classes.contacts}>
                 {allContacts}
             </div>

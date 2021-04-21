@@ -2,15 +2,16 @@ import {
     FETCH_CONTACTS_FAILURE,
     FETCH_CONTACTS_SUCCESS,
     ADD_CONTACT_FAILURE,
-    DELETE_CONTACT_FAILURE
-
+    DELETE_CONTACT_FAILURE,
+    EDIT_CONTACT_FAILURE
 } from "./actionTypes";
 
 const initialState = {
     contacts: [],
     fetchContactsError: null,
     addContactError: null,
-    removeContactError: null
+    removeContactError: null,
+    editContactFailure: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +24,8 @@ const reducer = (state = initialState, action) => {
             return {...state, addContactError: action.error};
         case DELETE_CONTACT_FAILURE:
             return {...state, removeContactError: action.error};
+        case EDIT_CONTACT_FAILURE:
+            return {...state, editContactFailure: action.error};
         default:
             return state;
     }

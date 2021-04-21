@@ -36,4 +36,23 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+router.put('/edit/:id', config.upload.single("image"), async (req, res) => {
+    let editedContact = req.body;
+    if (req.file) {
+        editedContact.image = req.file.filename;
+    }
+
+    const result = await Contact.findByIdAndUpdate(req.params.id, editedContact);
+
+    if (result) {
+        try {
+            res.send('Success');
+        } catch (e) {
+            res.sendStatus(400);
+        }
+    } else {
+        res.sendStatus(404);
+    }
+});
+
 module.exports = router;

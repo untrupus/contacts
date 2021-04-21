@@ -2,7 +2,8 @@ import {
     FETCH_CONTACTS_FAILURE,
     FETCH_CONTACTS_SUCCESS,
     ADD_CONTACT_FAILURE,
-    DELETE_CONTACT_FAILURE
+    DELETE_CONTACT_FAILURE,
+    EDIT_CONTACT_FAILURE
 } from "./actionTypes";
 
 import axiosOrder from "../axiosOrder";
@@ -51,5 +52,19 @@ export const deleteContact = id => {
         } catch (e) {
             dispatch(deleteContactFailure(e))
         }
-    }
-}
+    };
+};
+
+const editContactFailure = error => {
+    return {type: EDIT_CONTACT_FAILURE, error};
+};
+
+export const editContact = (id, data) => {
+    return async dispatch => {
+        try {
+            await axiosOrder.put("/contacts/edit/" + id, data);
+        } catch (e) {
+            dispatch(editContactFailure(e));
+        }
+    };
+};

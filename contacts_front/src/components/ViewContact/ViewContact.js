@@ -16,7 +16,10 @@ const useStyles = makeStyles((theme) => ({
     viewContact: {
         width: '50vw',
         padding: '20px',
-        textAlign: 'center'
+        textAlign: 'center',
+        [theme.breakpoints.down('xs')]: {
+            width: '85%',
+        },
     },
     btnBlock: {
         display: 'flex',

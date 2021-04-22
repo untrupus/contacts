@@ -5,20 +5,40 @@ import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import {fetchContacts, searchContactSuccess} from "../../store/actions";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     searchForm: {
         width: '50%',
         padding: '20px 0',
         margin: '20px auto',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        [theme.breakpoints.down('sm')]: {
+            width: '95%',
+            flexWrap: 'wrap',
+            margin: '0 auto',
+            padding: '10px 0'
+        },
     },
     field: {
-        width: '70%'
+        width: "75%",
+        [theme.breakpoints.down('sm')]: {
+            width: '100%'
+        },
     },
     btn: {
-        margin: '10px'
+        marginLeft: '10px',
+        [theme.breakpoints.down('sm')]: {
+            margin: '10px 0',
+            width: '45%'
+        },
+    },
+    btnBlock: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        [theme.breakpoints.down('sm')]: {
+            width: '100%'
+        },
     }
 }));
 
@@ -45,8 +65,10 @@ const SearchForm = () => {
     };
 
     const startSearch = () => {
-        const contact = contacts.filter(contact => contact.name === search.name);
-        dispatch(searchContactSuccess(contact));
+        if (search.name !== '') {
+            const contact = contacts.filter(contact => contact.name === search.name);
+            dispatch(searchContactSuccess(contact));
+        }
     };
 
     return (
@@ -59,7 +81,7 @@ const SearchForm = () => {
                 onChange={inputChangeHandler}
                 className={classes.field}
             />
-            <div>
+            <div className={classes.btnBlock}>
                 <Button variant="contained"
                         color="primary"
                         className={classes.btn}

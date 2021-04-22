@@ -5,14 +5,21 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import noImage from "./noImage.png";
 import ViewContact from "../ViewContact/ViewContact";
+import {useTheme} from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const useStyles = makeStyles((theme) => ({
     contact: {
         width: '50%',
         padding: '20px',
-        margin: '20px auto',
+        margin: '0 auto 20px',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        boxSizing: 'border-box',
+        [theme.breakpoints.down('sm')]: {
+            width: '95%'
+        },
     },
     large: {
         marginRight: '30px',
@@ -20,16 +27,22 @@ const useStyles = makeStyles((theme) => ({
         height: theme.spacing(7),
     },
     name: {
-        margin: '0'
+        margin: '0',
     },
     contactInfo: {
         flexGrow: 1
+    },
+    viewIcon: {
+        fontSize: '30px',
+        color: 'darkblue'
     }
 }));
 
 const SingleContact = (props) => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.down('xs'));
 
     return (
         <>
@@ -54,13 +67,17 @@ const SingleContact = (props) => {
                     <p>Phone: {props.phone}</p>
                 </div>
 
-                <Button
+                {!matches ? <Button
                     variant="contained"
                     color="primary"
                     onClick={() => setOpen(!open)}
                 >
                     View contact
-                </Button>
+                </Button> :
+                    <VisibilityIcon
+                        onClick={() => setOpen(!open)}
+                        className={classes.viewIcon}
+                    />}
             </Paper>
         </>
     );

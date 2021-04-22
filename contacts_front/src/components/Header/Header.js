@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import {makeStyles, useTheme} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -8,20 +8,25 @@ import IconButton from '@material-ui/core/IconButton';
 import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 import AddContactForm from "../AddContactForm/AddContactForm";
 import LetterSort from "../LetterSort/LetterSort";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
-    menuButton: {
-        // marginRight: theme.spacing(2),
-    },
+    title: {
+        [theme.breakpoints.down('sm')]: {
+            flexGrow: 1,
+        },
+    }
 
 }));
 
 const Header = () => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
         <div className={classes.root}>
@@ -37,7 +42,7 @@ const Header = () => {
                     <Typography variant="h6" className={classes.title}>
                         My Contacts
                     </Typography>
-                    <LetterSort/>
+                    {!matches ? <LetterSort/> : null}
                     <Button
                         color="inherit"
                         onClick={() => setOpen(!open)}

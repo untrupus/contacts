@@ -14,7 +14,10 @@ const useStyles = makeStyles((theme) => ({
     },
     addContact: {
         width: '50vw',
-        padding: '20px'
+        padding: '20px',
+        [theme.breakpoints.down('xs')]: {
+            width: '85%',
+        },
     },
     btnBlock: {
         display: 'flex',
@@ -61,114 +64,121 @@ const AddContactForm = (props) => {
     };
 
     const formSubmit = (e) => {
-        e.preventDefault();
-        const formData = new FormData();
-        Object.keys(contactData).forEach(key => {
-            formData.append(key, contactData[key]);
-        });
+        if (contactData.name !== '' || contactData.phone !== '') {
+            e.preventDefault();
+            const formData = new FormData();
+            Object.keys(contactData).forEach(key => {
+                formData.append(key, contactData[key]);
+            });
 
-        dispatch(addContact(formData));
-        dispatch(fetchContacts());
+            dispatch(addContact(formData));
+            dispatch(fetchContacts());
 
-        setContactData({
-            name: '',
-            phone: '',
-            address: '',
-            email: '',
-            website: '',
-            image: ''
-        });
-        props.click();
+            setContactData({
+                name: '',
+                phone: '',
+                address: '',
+                email: '',
+                website: '',
+                image: ''
+            });
+            props.click();
+        }
     };
 
     return (
         <div>
             <Backdrop className={classes.backdrop} open={props.open}>
                 <Paper className={classes.addContact}>
-                    <div>
-                        <TextField
-                            label="Name"
-                            variant="outlined"
-                            fullWidth
-                            name="name"
-                            value={contactData.name}
-                            onChange={inputChangeHandler}
-                            className={classes.field}
-                        />
-                        <TextField
-                            label="Phone"
-                            variant="outlined"
-                            fullWidth
-                            name="phone"
-                            value={contactData.phone}
-                            onChange={inputChangeHandler}
-                            className={classes.field}
-                        />
-                        <TextField
-                            label="Address"
-                            variant="outlined"
-                            fullWidth
-                            name="address"
-                            value={contactData.address}
-                            onChange={inputChangeHandler}
-                            className={classes.field}
-                        />
-                        <TextField
-                            label="Email"
-                            variant="outlined"
-                            fullWidth
-                            name="email"
-                            value={contactData.email}
-                            onChange={inputChangeHandler}
-                            className={classes.field}
-                        />
-                        <TextField
-                            label="Website"
-                            variant="outlined"
-                            fullWidth
-                            name="website"
-                            value={contactData.website}
-                            onChange={inputChangeHandler}
-                            className={classes.field}
-                        />
-                    </div>
-                    <input
-                        accept="image/*"
-                        style={{ display: 'none' }}
-                        id="button-file"
-                        multiple
-                        name='image'
-                        ref={inputRef}
-                        onChange={fileChangeHandler}
-                        type="file"
-                    />
-                    <label htmlFor="button-file">
-                        <Button variant="contained"
-                                component="span"
+                    <form onSubmit={formSubmit}>
+                        <div>
+                            <TextField
+                                label="Name"
+                                variant="outlined"
                                 fullWidth
-                                color="primary"
-                                className={classes.label}
-                        >
-                            add photo
-                        </Button>
-                    </label>
+                                required
+                                name="name"
+                                value={contactData.name}
+                                onChange={inputChangeHandler}
+                                className={classes.field}
+                            />
+                            <TextField
+                                required
+                                label="Phone"
+                                variant="outlined"
+                                fullWidth
+                                name="phone"
+                                value={contactData.phone}
+                                onChange={inputChangeHandler}
+                                className={classes.field}
+                            />
+                            <TextField
+                                label="Address"
+                                variant="outlined"
+                                fullWidth
+                                name="address"
+                                value={contactData.address}
+                                onChange={inputChangeHandler}
+                                className={classes.field}
+                            />
+                            <TextField
+                                label="Email"
+                                variant="outlined"
+                                fullWidth
+                                name="email"
+                                value={contactData.email}
+                                onChange={inputChangeHandler}
+                                className={classes.field}
+                            />
+                            <TextField
+                                label="Website"
+                                variant="outlined"
+                                fullWidth
+                                name="website"
+                                value={contactData.website}
+                                onChange={inputChangeHandler}
+                                className={classes.field}
+                            />
+                        </div>
+                        <input
+                            accept="image/*"
+                            style={{display: 'none'}}
+                            id="button-file"
+                            multiple
+                            name='image'
+                            ref={inputRef}
+                            onChange={fileChangeHandler}
+                            type="file"
+                        />
+                        <label htmlFor="button-file">
+                            <Button variant="contained"
+                                    component="span"
+                                    fullWidth
+                                    color="primary"
+                                    className={classes.label}
+                            >
+                                add photo
+                            </Button>
+                        </label>
 
-                    <div className={classes.btnBlock}>
-                        <Button variant="contained"
-                                color="primary"
-                                className={classes.btn}
-                                onClick={formSubmit}
-                        >
-                            add contact
-                        </Button>
-                        <Button variant="contained"
-                                color="primary"
-                                className={classes.btn}
-                                onClick={props.click}
-                        >
-                            cancel
-                        </Button>
-                    </div>
+                        <div className={classes.btnBlock}>
+                            <Button variant="contained"
+                                    color="primary"
+                                    type="submit"
+                                    className={classes.btn}
+                                    onClick={formSubmit}
+                            >
+                                add contact
+                            </Button>
+                            <Button variant="contained"
+                                    color="primary"
+                                    className={classes.btn}
+                                    onClick={props.click}
+                            >
+                                cancel
+                            </Button>
+                        </div>
+                    </form>
                 </Paper>
             </Backdrop>
         </div>

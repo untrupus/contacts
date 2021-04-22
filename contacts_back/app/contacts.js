@@ -34,6 +34,7 @@ router.post('/', config.upload.single("image"), async (req, res) => {
     if (req.file) {
         contactData.image = req.file.filename;
     }
+
     const contact = new Contact(contactData);
 
     try {

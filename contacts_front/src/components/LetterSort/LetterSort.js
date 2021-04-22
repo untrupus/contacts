@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
     letter: {
         textTransform: 'uppercase',
         cursor: 'pointer',
+        margin: 0,
         '&:hover': {
             textDecoration: "underline"
         }
@@ -15,7 +16,16 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexGrow: 1,
         padding: '0 10%',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        [theme.breakpoints.down('md')]: {
+            padding: '0 3%',
+            marginTop: '5px'
+        },
+        [theme.breakpoints.down('xs')]: {
+            width: '95%',
+            margin: '5px auto 0',
+            padding: '0',
+        },
     }
 }));
 

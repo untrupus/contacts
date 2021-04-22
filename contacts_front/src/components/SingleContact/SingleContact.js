@@ -67,6 +67,7 @@ const SingleContact = (props) => {
                     <p>Phone: {props.phone}</p>
                 </div>
 
+                {/*Change button on small screens*/}
                 {!matches ? <Button
                     variant="contained"
                     color="primary"

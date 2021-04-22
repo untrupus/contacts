@@ -16,6 +16,7 @@ router.get("/:letter", async (req, res) => {
     const contacts = await Contact.find();
     const sortedContacts = [];
 
+    // Sorts contacts by first letter and push them in new array which is sent to the client.
     contacts.forEach(contact => {
         if (contact.name[0].toLowerCase() === req.params.letter.toLowerCase()) {
             sortedContacts.push(contact);

@@ -64,6 +64,9 @@ const SearchForm = () => {
         setSearch({name: ''});
     };
 
+    // This function sorts the array with 'filter()' method and looks like true search
+    // but would be better to use 'MongoDB search' or ElasticSearch. But it is too difficult for this simple app.
+
     const startSearch = () => {
         if (search.name !== '') {
             const contact = contacts.filter(contact => contact.name === search.name);

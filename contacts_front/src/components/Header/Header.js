@@ -30,10 +30,12 @@ const Header = () => {
 
     return (
         <div className={classes.root}>
+
             <AddContactForm
                 open={open}
                 click={() => setOpen(!open)}
             />
+
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
@@ -42,7 +44,10 @@ const Header = () => {
                     <Typography variant="h6" className={classes.title}>
                         My Contacts
                     </Typography>
+
+                    {/*Hides letters on small screens*/}
                     {!matches ? <LetterSort/> : null}
+
                     <Button
                         color="inherit"
                         onClick={() => setOpen(!open)}

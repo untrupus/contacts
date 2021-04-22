@@ -72,7 +72,7 @@ const AddContactForm = (props) => {
             });
 
             dispatch(addContact(formData));
-            dispatch(fetchContacts());
+            dispatch(fetchContacts()); // This dispatch used for refresh of contact list.
 
             setContactData({
                 name: '',

@@ -25,6 +25,9 @@ function App() {
         dispatch(fetchContacts());
     }, [dispatch]);
 
+    // Methods for alphabet sorting. At first create new array with value and index of values used for sorting.
+    // Then sort new array and move sorted array back.
+
     const lowerCaseContacts = contacts.map((cont, ind) => {
         return { index: ind, value: cont.name.toLowerCase() };
     });
